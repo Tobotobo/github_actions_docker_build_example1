@@ -34,10 +34,14 @@ jobs:
           push: false
           tags: tobotobo/${{ env.IMAGE_NAME }}:latest
       -
-        name: Save image
-        run: docker save tobotobo/${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}.tar
-      - 
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.IMAGE_NAME }}
-          path: ./${{ env.IMAGE_NAME }}.tar
+        name: デバッグ中
+        run: docker image ln
+
+      # -
+      #   name: Save image
+      #   run: docker save tobotobo/${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}.tar
+      # - 
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ env.IMAGE_NAME }}
+      #     path: ./${{ env.IMAGE_NAME }}.tar
