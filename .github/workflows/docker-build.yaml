@@ -11,6 +11,11 @@ jobs:
     env:
       IMAGE_NAME: my_nginx
     steps:
+      - 
+        name: set lower case owner name
+        run: echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
       # -
       #   name: Checkout
       #   uses: actions/checkout@v3
@@ -33,7 +38,7 @@ jobs:
         with:
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.IMAGE_NAME }}"
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+          tags: ghcr.io/${{ OWNER_LC }}/${{ env.IMAGE_NAME }}:latest
       # -
       #   name: デバッグ中
       #   run: docker image ls
