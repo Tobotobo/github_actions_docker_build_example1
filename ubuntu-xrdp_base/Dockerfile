@@ -21,7 +21,8 @@ RUN apt-get -y update && apt-get install -y \
   # wget \
   # xauth \
   # xautolock \
-  xfce4 \
+  # xfce4 \
+  lxde \
   # xfce4-clipman-plugin \
   # xfce4-cpugraph-plugin \
   # xfce4-netload-plugin \
@@ -35,7 +36,8 @@ RUN apt-get -y update && apt-get install -y \
   apt-get remove -yy xscreensaver && \
   apt-get autoremove -yy && \
   rm -rf /var/cache/apt /var/lib/apt/lists && \
-  echo "xfce4-session" > ~/.xsession
+  # echo "xfce4-session" > ~/.xsession
+  echo lxsession -s LXDE -e LXDE > ~/.xsession
   # mkdir -p /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-sink.so /var/lib/xrdp-pulseaudio-instal1ler
@@ -61,7 +63,7 @@ RUN apt-get -y update && apt-get install -y \
 EXPOSE 3389
 # ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 # CMD ["supervisord"]
-CMD ["/etc/init.d/xrdp", " start"]
+CMD ["bash" "-c" "/etc/init.d/xrdp", " start"]
 # RUN chmod u+x /usr/bin/docker-entrypoint.sh
 
 
