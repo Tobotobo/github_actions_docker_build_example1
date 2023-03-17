@@ -25,5 +25,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: .my_nginx
           push: false
           tags: tobotobo/my_nginx:latest
