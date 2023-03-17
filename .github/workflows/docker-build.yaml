@@ -35,7 +35,7 @@ jobs:
           tags: tobotobo/${{ env.IMAGE_NAME }}:latest
       -
         name: デバッグ中
-        run: docker image ln
+        run: docker image ls
 
       # -
       #   name: Save image
