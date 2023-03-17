@@ -3,7 +3,7 @@ ARG DEBIAN_FRONTEND noninteractive
 # RUN apt update && apt install -y software-properties-common
 # RUN add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner" && apt update
 # # RUN apt -y full-upgrade && apt install -y \
-RUN apt -y update && apt install -y \
+RUN apt-get -y update && apt-get install -y \
   # adobe-flashplugin \
   # browser-plugin-freshplayer-pepperflash \
   # ca-certificates \
@@ -31,7 +31,7 @@ RUN apt -y update && apt install -y \
   # xfce4-xkb-plugin \
   # xorgxrdp \
   # xprintidle \
-  xrdp \
+  xrdp && \
   apt-get remove -yy xscreensaver && \
   apt-get autoremove -yy && \
   rm -rf /var/cache/apt /var/lib/apt/lists && \
