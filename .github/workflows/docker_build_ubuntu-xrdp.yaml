@@ -2,8 +2,6 @@ name: docker_build_ubuntu-xrdp
 
 on:
   workflow_dispatch:
-    branches:
-      - 'main'
 
 jobs:
   docker:

@@ -39,9 +39,10 @@ FROM ubuntu:18.04
 ARG ADDITIONAL_PACKAGES=""
 ENV ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES}
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt update && apt install -y software-properties-common
-RUN add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner" && apt update
-RUN apt -y full-upgrade && apt install -y \
+# RUN apt update && apt install -y software-properties-common
+# RUN add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner" && apt update
+# # RUN apt -y full-upgrade && apt install -y \
+RUN apt -y update && apt install -y \
   # adobe-flashplugin \
   # browser-plugin-freshplayer-pepperflash \
   ca-certificates \
@@ -54,27 +55,27 @@ RUN apt -y full-upgrade && apt install -y \
   sudo \
   supervisor \
   uuid-runtime \
-  vim \
-  vlc \
+  # vim \
+  # vlc \
   wget \
   xauth \
   xautolock \
   xfce4 \
-  xfce4-clipman-plugin \
-  xfce4-cpugraph-plugin \
-  xfce4-netload-plugin \
-  xfce4-screenshooter \
+  # xfce4-clipman-plugin \
+  # xfce4-cpugraph-plugin \
+  # xfce4-netload-plugin \
+  # xfce4-screenshooter \
   xfce4-taskmanager \
   xfce4-terminal \
-  xfce4-xkb-plugin \
+  # xfce4-xkb-plugin \
   xorgxrdp \
   xprintidle \
   xrdp \
   $ADDITIONAL_PACKAGES && \
   apt-get remove -yy xscreensaver && \
   apt-get autoremove -yy && \
-  rm -rf /var/cache/apt /var/lib/apt/lists && \
-  mkdir -p /var/lib/xrdp-pulseaudio-installer
+  rm -rf /var/cache/apt /var/lib/apt/lists
+  # mkdir -p /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-sink.so /var/lib/xrdp-pulseaudio-instal1ler
 ADD bin /usr/bin

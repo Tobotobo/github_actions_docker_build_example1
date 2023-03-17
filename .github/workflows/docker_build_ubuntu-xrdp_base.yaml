@@ -1,4 +1,4 @@
-name: docker_build_my_nginx
+name: docker_build_ubuntu-xrdp_base
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
         contents: read
         packages: write
     env:
-      IMAGE_NAME: my_nginx
+      IMAGE_NAME: ubuntu-xrdp_base
     steps:
       - 
         name: set lower case owner name
