@@ -9,7 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     env:
-      CONTEXT_SUBDIR: my_nginx
+      IMAGE_NAME: my_nginx
     steps:
       # -
       #   name: Checkout
@@ -30,6 +30,14 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.CONTEXT_SUBDIR }}"
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.IMAGE_NAME }}"
           push: false
-          tags: tobotobo/my_nginx:latest
+          tags: tobotobo/${{ env.IMAGE_NAME }}:latest
+      -
+        name: Save image
+        run: docker save tobotobo/${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}.tar
+      - 
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.IMAGE_NAME }}
+          path: ./${{ env.IMAGE_NAME }}.tar
