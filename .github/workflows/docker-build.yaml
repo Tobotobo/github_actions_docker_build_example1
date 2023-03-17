@@ -8,6 +8,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      CONTEXT_SUBDIR: my_nginx
     steps:
       -
         name: Checkout
@@ -28,6 +30,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .my_nginx
+          context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.CONTEXT_SUBDIR }}"
           push: false
           tags: tobotobo/my_nginx:latest
