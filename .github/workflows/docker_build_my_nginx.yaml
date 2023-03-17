@@ -1,4 +1,4 @@
-name: docker-build
+name: docker_build_my_nginx
 
 on:
   workflow_dispatch:
@@ -42,15 +42,3 @@ jobs:
           context: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}:${{ env.IMAGE_NAME }}"
           push: true
           tags: ghcr.io/${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}:latest
-      # -
-      #   name: デバッグ中
-      #   run: docker image ls
-
-      # -
-      #   name: Save image
-      #   run: docker save tobotobo/${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}.tar
-      # - 
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ env.IMAGE_NAME }}
-      #     path: ./${{ env.IMAGE_NAME }}.tar
