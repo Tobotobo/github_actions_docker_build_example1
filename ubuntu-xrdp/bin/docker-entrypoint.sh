@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "docker-entrypoint.sh start"  
-
 # Add users
 bash /usr/bin/create-users.sh
 
