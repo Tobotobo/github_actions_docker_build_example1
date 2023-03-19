@@ -2,6 +2,8 @@
 
 https://github.com/Tobotobo/github_actions_docker_build_example1
 
+## 注意
+このリポジトリの内容は実験中で、利用した場合何が起こるかわかりません。
 
 
 
