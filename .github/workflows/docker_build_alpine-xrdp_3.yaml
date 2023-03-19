@@ -1,4 +1,4 @@
-name: docker_build_alpine_xrdp_3
+name: docker_build_alpine-xrdp_3
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
         contents: read
         packages: write
     env:
-      IMAGE_NAME: alpine_xrdp_3
+      IMAGE_NAME: alpine-xrdp_3
     steps:
       - 
         name: set lower case owner name
