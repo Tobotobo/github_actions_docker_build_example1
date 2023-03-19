@@ -10,11 +10,11 @@ RUN apt-get -y update && apt-get install -y \
   # crudini \
   # firefox \
   # less \
-  # locales \
-  # openssh-server \
+  locales \
+  openssh-server \
   # pulseaudio \
-  # sudo \
-  # supervisor \
+  sudo \
+  supervisor \
   # uuid-runtime \
   # vim \
   # vlc \
@@ -35,36 +35,35 @@ RUN apt-get -y update && apt-get install -y \
   xrdp && \
   apt-get remove -yy xscreensaver && \
   apt-get autoremove -yy && \
-  rm -rf /var/cache/apt /var/lib/apt/lists && \
-  echo "xfce4-session" > ~/.xsession
+  rm -rf /var/cache/apt /var/lib/apt/lists
+  # echo "xfce4-session" > ~/.xsession
   # echo lxsession -s LXDE -e LXDE > ~/.xsession
   # mkdir -p /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer
 # COPY --from=builder /tmp/so/module-xrdp-sink.so /var/lib/xrdp-pulseaudio-instal1ler
-# ADD bin /usr/bin
-# ADD etc /etc
-# ADD autostart /etc/xdg/autostart
+ADD bin /usr/bin
+ADD etc /etc
+ADD autostart /etc/xdg/autostart
 # #ADD pulse /usr/lib/pulse-10.0/modules/
 
-# # Configure
-# RUN mkdir /var/run/dbus && \
-#   cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
-#   sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
-#   sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
-#   locale-gen en_US.UTF-8 && \
-#   echo "xfce4-session" > /etc/skel/.Xclients && \
-#   cp -r /etc/ssh /ssh_orig && \
-#   rm -rf /etc/ssh/* && \
-#   rm -rf /etc/xrdp/rsakeys.ini /etc/xrdp/*.pem
+# Configure
+RUN mkdir /var/run/dbus && \
+  cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
+  sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
+  sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
+  locale-gen en_US.UTF-8 && \
+  echo "xfce4-session" > /etc/skel/.Xclients && \
+  cp -r /etc/ssh /ssh_orig && \
+  rm -rf /etc/ssh/* && \
+  rm -rf /etc/xrdp/rsakeys.ini /etc/xrdp/*.pem
 
-# # Docker config
-# VOLUME ["/etc/ssh","/home"]
-# EXPOSE 3389 22 9001
-EXPOSE 3389
-# ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
-# CMD ["supervisord"]
-CMD ["/bin/bash" "-c" "/etc/init.d/xrdp", " start"]
-# RUN chmod u+x /usr/bin/docker-entrypoint.sh
+# Docker config
+VOLUME ["/etc/ssh","/home"]
+EXPOSE 3389 22 9001
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
+CMD ["supervisord"]
+
+RUN chmod u+x /usr/bin/docker-entrypoint.sh
 
 
 
