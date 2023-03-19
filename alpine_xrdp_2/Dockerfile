@@ -4,7 +4,7 @@ RUN apk update --no-cache && \
     apk upgrade --no-cache && \
     apk add --no-cache \ 
     bash \ 
-    # locales \
+    # locales ※無い \ 
     openssh-server \
     sudo \
     supervisor \
@@ -17,8 +17,8 @@ ADD autostart /etc/xdg/autostart
 # #ADD pulse /usr/lib/pulse-10.0/modules/
 
 # Configure
-RUN mkdir /var/run/dbus && \
-  cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
+# mkdir /var/run/dbus && \ ※既にフォルダが存在する
+RUN cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
   sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
   sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
   locale-gen en_US.UTF-8 && \
