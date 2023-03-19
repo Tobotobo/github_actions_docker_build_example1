@@ -4,7 +4,7 @@ RUN apk update --no-cache && \
     apk upgrade --no-cache && \
     apk add --no-cache \ 
     bash \ 
-    locales \
+    # locales \
     openssh-server \
     sudo \
     supervisor \
